@@ -42,14 +42,16 @@ is_weird_word = weird_word == "weird"
 print(is_weird_word)
 
 #9 create variable named false
-false  # error because false is not defined "NameError: name 'false' is not defined. Did you mean: 'False'?"
+false
+# error because false is a not defined "NameError: name 'false' is not defined. Did you mean: 'False'?"
+# 'False' is a reserved keyword and would be what one would set a variable as for a boolean 
 
 #10 create variable for value of 35/7, value of 15^3, value of variable 2 % variable 1, value of variable 2 / variable 1. Compare results
-num3 = 35/7
-num4 = 15 ** 3
-num5 = num4 % num3
-num6 = num4 / num3
-print(num3)
-print(num4)
-print(num5)
-print(num6)
+variable1 = 35/7
+variable2 = 15 ** 3
+variable3 = variable2 % variable1
+variable4 = variable2 / variable1
+print(variable1)
+print(variable2)
+print(variable3)
+print(variable4)

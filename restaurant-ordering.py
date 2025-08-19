@@ -18,18 +18,19 @@ def display_menu():
 # calculate total and display order summary prints to a txt file
 def calculate_total():
     order_total = 0.0
-    f = open("receipt.txt", "a")
+    f = open("receipt.txt", "w")
+
     # display order summary
-    print("Item  Quantity  Price")
-    f.write(("Item  Quantity  Price\n"))
+    print(" Item         Price  Qty  Item Total")
+    f.write((" Item         Price  Qty  Item Total\n"))
     for item_num, quantity in customer_order.items():
         item_name = menu[item_num]["name"]
         item_price = menu[item_num]["price"]    
         item_total = round(quantity * item_price, 2)
     
         # prints each line item with quantity and price
-        print(f'{item_name}    {quantity}    ${item_total:.2f}')
-        f.write((f'{item_name}    {quantity}    ${item_total:.2f}\n'))
+        print(f'{item_name}    ${item_price}    {quantity}    ${item_total:.2f}')
+        f.write((f'{item_name}    ${item_price}    {quantity}    ${item_total:.2f}\n'))
         order_total += item_total
 
     print(f"Total: ${order_total:.2f}")

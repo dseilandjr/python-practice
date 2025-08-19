@@ -39,6 +39,7 @@ def place_order():
     print("Welcome to our restaurant")
     while ordering == True:
         display_menu()
+        item_ordered = False
     # prompt user to select menu item
         item_choice = int(input("Please select an item number: "))
         # check if valid item_choice to add to customer_order dictionary
@@ -49,11 +50,12 @@ def place_order():
                     customer_order[item_choice] += item_quantity
                 else:
                     customer_order[item_choice] = item_quantity
+                item_ordered = True
             else:
                 print("Invalid quantity. Please try again.") 
             # prompt user to select if they would like to continue ordering
-            while True:
-                additional_items = (input("Would you like to order more items? (Y/N)"))
+            while item_ordered == True:
+                additional_items = (input("Would you like to order more items? (Y/N): "))
                 if additional_items.upper() == "N":
                     ordering = False
                     break
@@ -66,4 +68,5 @@ def place_order():
     # calls calculate_total function to calculate total and display order summary
     calculate_total()        
 
+# calls place_order function to run program
 place_order()

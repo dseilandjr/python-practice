@@ -18,7 +18,7 @@ def display_menu():
 # calculate total and display order summary
 def calculate_total():
     order_total = 0.0
-
+    # display order summary
     print("Item  Quantity  Price")
     for item_num, quantity in customer_order.items():
         item_name = menu[item_num]["name"]
@@ -34,9 +34,10 @@ def calculate_total():
     
 # place order
 def place_order():
+    ordering = True
     # display welcome message
     print("Welcome to our restaurant")
-    while True:
+    while ordering == True:
         display_menu()
     # prompt user to select menu item
         item_choice = int(input("Please select an item number: "))
@@ -50,17 +51,19 @@ def place_order():
                     customer_order[item_choice] = item_quantity
             else:
                 print("Invalid quantity. Please try again.") 
+            # prompt user to select if they would like to continue ordering
             while True:
                 additional_items = (input("Would you like to order more items? (Y/N)"))
                 if additional_items.upper() == "N":
+                    ordering = False
                     break
                 elif additional_items.upper() == "Y":
-                    continue
+                    break
                 else:
                     print("Invalid selection. Please try again.") 
         else: 
             print("Invalid selection. Please try again.") 
-
+    # calls calculate_total function to calculate total and display order summary
     calculate_total()        
 
 place_order()

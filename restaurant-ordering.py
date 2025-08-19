@@ -36,8 +36,8 @@ def calculate_total():
 
         # prints order total and writes to receipt.txt
         total_line = f"{'Order Total:':<27}{f'${order_total:.2f}':>12}"
-        print(total_line)
-        f.write(total_line + "\n")
+        print("\n" + total_line)
+        f.write("\n" + total_line + "\n")
    
         
 # place order

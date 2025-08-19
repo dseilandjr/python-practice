@@ -40,7 +40,7 @@ def place_order():
         display_menu()
     # prompt user to select menu item
         item_choice = int(input("Please select an item number: "))
-        # check if valid item_choice and assigns item_name to use with customer_order dictionary
+        # check if valid item_choice to add to customer_order dictionary
         if item_choice in menu:
             item_quantity = int(input("How many?: "))
             if item_quantity > 0:
@@ -49,10 +49,18 @@ def place_order():
                 else:
                     customer_order[item_choice] = item_quantity
             else:
-                print("Invalid selection. Please try again.") 
-            additional_items = (input("Would you like to order more items? (Y/N)"))
-            if additional_items.upper()== "N":
-                break
+                print("Invalid quantity. Please try again.") 
+            while True:
+                additional_items = (input("Would you like to order more items? (Y/N)"))
+                if additional_items.upper() == "N":
+                    break
+                elif additional_items.upper() == "Y":
+                    continue
+                else:
+                    print("Invalid selection. Please try again.") 
         else: 
             print("Invalid selection. Please try again.") 
+
+    calculate_total()        
+
 place_order()

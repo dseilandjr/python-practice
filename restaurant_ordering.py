@@ -7,18 +7,19 @@ menu = {
 }
 
 customer_order = {}
+order_total = 0.0
 
 # displays menu
 def display_menu():
-    print("Menu")
+    # print menu
+    print("\n     === Menu ===     ")
     for item_num, item_details in menu.items():
-        print(f'{item_num}. {item_details["name"]} - ${item_details["price"]:.2f}')
+        print(f"{item_num}. {item_details['name']:<10} -  ${item_details['price']:.2f}")
 
 # calculate total and displays order summary and writes to receipt.txt 
 def calculate_total():
-    order_total = 0.0
-    with open("receipt.txt", "w") as f:
-
+    
+    with open("receipt.txt", "") as f:
         # display order summary
         header = f"{'Item':<15}{'Price':>8}{'Qty':>6}{'Item Total':>12}"
         print(header)
@@ -36,10 +37,21 @@ def calculate_total():
 
         # prints order total and writes to receipt.txt
         total_line = f"{'Order Total:':<27}{f'${order_total:.2f}':>12}"
-        print("\n" + total_line)
+        print("\n" + total_line + "\n")
         f.write("\n" + total_line + "\n")
-   
-        
+
+# funcation to take payment WORK IN PROGRESS
+def take_payment():
+    while True:
+        payment_method = input(f"Your total is {order_total:.2f}. Will you be using cash or card? ").strip().lower()
+        if payment_method == "cash":
+            break
+        elif payment_method == "card":
+            break    
+        else:
+            print("Invalid payment method")
+            continue
+
 # place order
 def place_order():
     ordering = True
@@ -49,7 +61,7 @@ def place_order():
         display_menu()
         item_ordered = False
     # prompt user to select menu item
-        item_choice = int(input("Please select an item number: "))
+        item_choice = int(input("\nPlease select an item number: "))
         # check if valid item_choice to add to customer_order dictionary
         if item_choice in menu:
             item_quantity = int(input("How many?: "))

@@ -8,41 +8,43 @@ menu = {
 
 customer_order = {}
 
-
 # displays menu
 def display_menu():
     print("Menu")
     for item_num, item_details in menu.items():
         print(f'{item_num}. {item_details["name"]} - ${item_details["price"]:.2f}')
 
-# calculate total and display order summary prints to a txt file
+# calculate total and displays order summary and writes to receipt.txt 
 def calculate_total():
     order_total = 0.0
-    f = open("receipt.txt", "w")
+    with open("receipt.txt", "w") as f:
 
-    # display order summary
-    print(" Item         Price  Qty  Item Total")
-    f.write((" Item         Price  Qty  Item Total\n"))
-    for item_num, quantity in customer_order.items():
-        item_name = menu[item_num]["name"]
-        item_price = menu[item_num]["price"]    
-        item_total = round(quantity * item_price, 2)
+        # display order summary
+        header = f"{'Item':<15}{'Price':>8}{'Qty':>6}{'Item Total':>12}"
+        print(header)
+        f.write((header + "\n"))
+        for item_num, quantity in customer_order.items():
+            item_name = menu[item_num]["name"]
+            item_price = menu[item_num]["price"]    
+            item_total = round(quantity * item_price, 2)
     
-        # prints each line item with quantity and price
-        print(f'{item_name}    ${item_price}    {quantity}    ${item_total:.2f}')
-        f.write((f'{item_name}    ${item_price}    {quantity}    ${item_total:.2f}\n'))
-        order_total += item_total
+            # prints each line item with quantity and price and writes to receipt.txt
+            line_item = f"{item_name:<15}{f'${item_price:.2f}':>8}{quantity:>6}{f'${item_total:.2f}':>10}"
+            print(line_item)
+            f.write(line_item + "\n")
+            order_total += item_total
 
-    print(f"Total: ${order_total:.2f}")
-    f.write(f"Total: ${order_total:.2f} \n")
-    f.write("\n")
-    f.close()
+        # prints order total and writes to receipt.txt
+        total_line = f"{'Order Total:':<27}{f'${order_total:.2f}':>12}"
+        print(total_line)
+        f.write(total_line + "\n")
+   
         
 # place order
 def place_order():
     ordering = True
     # display welcome message
-    print("Welcome to our restaurant")
+    print("Welcome to our restaurant\n")
     while ordering == True:
         display_menu()
         item_ordered = False
@@ -74,5 +76,8 @@ def place_order():
     # calls calculate_total function to calculate total and display order summary
     calculate_total()        
 
-# calls place_order function to run program
-place_order()
+
+# Main execution block
+if __name__ == "__main__":
+    # calls place_order function to run program
+    place_order()
